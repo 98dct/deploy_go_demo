@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-test1
+  namespace: dev
+  labels:
+    app: my-go-app
+spec:
+  replicas: 3  # 部署3个副本
+  selector:
+    matchLabels:
+      app: my-go-app
+  template:
+    metadata:
+      labels:
+        app: my-go-app
+    spec:
+      containers:
+      - name: go-test1
+        image: go_test1:v1
+        ports:
+        - containerPort: 9997
+        env:
+        - name: PORT
+          value: "9997"
+        resources:
+          requests:
+            memory: "250Mi"
+            cpu: "250m"
+          limits:
+            memory: "250Mi"
+            cpu: "250m"
+
